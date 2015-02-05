@@ -45,8 +45,8 @@ public class SmsTest {
 
                 do {
                     String strAddress = cur.getString(index_Address);
-                    int intPerson = cur.getInt(index_Person);
-                    String strbody = cur.getString(index_Body);
+                    String intPerson = cur.getString(index_Person);
+                    String strBody = cur.getString(index_Body);
                     long longDate = cur.getLong(index_Date);
                     int intType = cur.getInt(index_Type);
 
@@ -66,7 +66,7 @@ public class SmsTest {
                     smsBuilder.append("[ ");
                     smsBuilder.append(strAddress + ", ");
                     smsBuilder.append(intPerson + ", ");
-                    smsBuilder.append(strbody + ", ");
+                    smsBuilder.append(strBody + ", ");
                     smsBuilder.append(strDate + ", ");
                     smsBuilder.append(strType);
                     smsBuilder.append(" ]\n\n");

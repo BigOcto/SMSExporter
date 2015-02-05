@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.bigocto.smsexporter.ui.activity.MainFrameActivity"
+            android:name="com.bigocto.smsexporter.ui.activity.LaunchActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,5 +19,9 @@
     </application>
 
     <uses-permission android:name="android.permission.READ_SMS"/>
+    <!-- 读取联系人权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <!-- 拨打电话权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
 </manifest>
