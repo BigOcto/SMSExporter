@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.bigocto.smsexporter.app.R;
-import com.bigocto.smsexporter.control.sms.SmsTest;
 
 public class SmsFragment extends Fragment{
 
@@ -25,8 +24,6 @@ public class SmsFragment extends Fragment{
         mContext=getActivity();
         view=inflater.inflate(R.layout.fragment_sms, container, false);
 
-        SmsTest test = new SmsTest(mContext);
-        System.out.print("SMS:" + test.getSmsInPhone());
 
         return view;
     }

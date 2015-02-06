@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.bigocto.smsexporter.app.R;
@@ -14,6 +13,7 @@ import com.bigocto.smsexporter.database.DbManager;
 
 /**
  * Launch activity
+ *
  * Created by zhangyu_sx
  * on 2015/2/5.
  */
@@ -38,6 +38,7 @@ public class LaunchActivity extends Activity {
                 startActivity(intent);
             }
         });
+
 
         DbManager manager = new DbManager(this);
         SQLiteDatabase db = manager.createDb(DB_NAME, Context.MODE_PRIVATE);

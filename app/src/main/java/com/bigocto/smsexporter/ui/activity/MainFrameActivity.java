@@ -14,16 +14,21 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.bigocto.smsexporter.app.R;
+import com.bigocto.smsexporter.database.SmsDbManager;
+import com.bigocto.smsexporter.model.SmsContent;
 import com.bigocto.smsexporter.ui.fragment.ExporterFragment;
 import com.bigocto.smsexporter.ui.fragment.SafeFragment;
 import com.bigocto.smsexporter.ui.fragment.SettingFragment;
 import com.bigocto.smsexporter.ui.fragment.SmsFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
+ *
  * Created by zhangyu
  * on 2015/2/4.
  */
@@ -43,10 +48,16 @@ public class MainFrameActivity extends FragmentActivity {
     public void onCreate(Bundle save) {
         super.onCreate(save);
 
+        SmsDbManager manager = new SmsDbManager(this);
+        HashMap<String, SmsContent> list = manager.getSmsWithNumber("18691078264");
+        System.out.print(list.toString());
         setContentView(R.layout.mainframe_activity);
         InitImageView();
         InitTextView();
         InitViewPager();
+
+        Toast t = Toast.makeText(this, list.get("18691078264").getAmount()+"", Toast.LENGTH_LONG);
+        t.show();
 
     }
 
