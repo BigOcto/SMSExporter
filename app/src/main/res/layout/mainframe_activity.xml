@@ -17,7 +17,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1.0"
                 android:gravity="center"
-                android:text="短信"
+                android:text="选择"
                 android:textSize="18.0dip"
                 android:textColor="@drawable/itemcolor"
                 android:background="#CCCCCC"/>
@@ -28,7 +28,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1.0"
                 android:gravity="center"
-                android:text="生成"
+                android:text="生成中"
                 android:textSize="18.0dip"
                 android:textColor="@drawable/itemcolor"
                 android:background="#CCCCCC"/>
@@ -39,7 +39,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1.0"
                 android:gravity="center"
-                android:text="黑名单"
+                android:text="结果"
                 android:textSize="18.0dip"
                 android:textColor="@drawable/itemcolor"
                 android:background="#CCCCCC"/>
@@ -49,7 +49,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1.0"
                 android:gravity="center"
-                android:text="设置"
+                android:text="反馈"
                 android:textSize="18.0dip"
                 android:textColor="@drawable/itemcolor"
                 android:background="#CCCCCC"/>

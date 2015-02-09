@@ -64,7 +64,7 @@ public class SmsDbManager {
 
                 do {
                     String strAddress = cur.getString(index_Address);
-                    String intPerson = cur.getString(index_Person);
+                    String intPerson = cur.getInt(index_Person) + "";
                     String strBody = cur.getString(index_Body);
                     long longDate = cur.getLong(index_Date);
                     int intType = cur.getInt(index_Type);
@@ -80,6 +80,7 @@ public class SmsDbManager {
                         content.setAmount(1);
                         content.setLast_date(strDate);
                         content.setLast_content(strBody);
+                        content.setPerson(intPerson);
                         mSmsContent.put(strAddress, content);
                     } else {
                         mSmsContent.get(strAddress).setAmount(mSmsContent.get(strAddress).getAmount() + 1);
