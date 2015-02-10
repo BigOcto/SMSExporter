@@ -1,10 +1,13 @@
 package com.bigocto.smsexporter.control.export;
 
 import android.os.Environment;
+import com.bigocto.smsexporter.model.SmsContent;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by zhangyu
@@ -12,6 +15,7 @@ import java.io.IOException;
  */
 public class ExportToText implements ExportManager {
     private File mSaveFile;
+
     public ExportToText(String path, String name) {
 
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -28,15 +32,30 @@ public class ExportToText implements ExportManager {
     }
 
     @Override
-    public void write(String content) {
-
+    public void write(List<SmsContent> list) {
+        BufferedWriter writer = null;
         try {
-            FileOutputStream outStream = new FileOutputStream(mSaveFile);
-            outStream.write("test".getBytes());
-            outStream.close();
-
+            writer = new BufferedWriter(new FileWriter(mSaveFile));
+            for (SmsContent sms : list) {
+//                writer.write(sms.getId());
+                writer.write("  ");
+                writer.write(sms.getBody());
+                writer.write("   " + sms.getType());
+                writer.write(" ");
+                writer.write(sms.getDate());
+                writer.write("\r\n");
+            }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.flush();
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

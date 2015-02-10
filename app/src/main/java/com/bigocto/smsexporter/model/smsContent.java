@@ -7,10 +7,10 @@ package com.bigocto.smsexporter.model;
 public class SmsContent {
     private int id;
     private String address;
-    private String person;
-    private int amount;
-    private String last_content;
-    private String last_date;
+    private int person;
+    private String body;
+    private String date;
+    private String type;
 
     public int getId() {
         return id;
@@ -28,35 +28,35 @@ public class SmsContent {
         this.address = address;
     }
 
-    public String getPerson() {
+    public int getPerson() {
         return person;
     }
 
-    public void setPerson(String person) {
+    public void setPerson(int person) {
         this.person = person;
     }
 
-    public int getAmount() {
-        return amount;
+    public String getBody() {
+        return body;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setBody(String body) {
+        this.body = body;
     }
 
-    public String getLast_content() {
-        return last_content;
+    public String getDate() {
+        return date;
     }
 
-    public void setLast_content(String last_content) {
-        this.last_content = last_content;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getLast_date() {
-        return last_date;
+    public String getType() {
+        return type;
     }
 
-    public void setLast_date(String last_date) {
-        this.last_date = last_date;
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.telephony.SmsManager;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,8 +54,11 @@ public class MainFrameActivity extends FragmentActivity {
         InitTextView();
         InitViewPager();
 
-        ExportToText export = new ExportToText("smsExport","smstest");
-        export.write();
+        SmsDbManager  manager = new SmsDbManager(this);
+        List<SmsContent> list = manager.getSmsWithNumber("15251751679");
+        ExportToText exporter = new ExportToText("smsExport", "mytest2");
+
+        exporter.write(list);
 
     }
 

@@ -32,7 +32,7 @@ public class SmsDbManager {
     final String CONTACT_URL = "content://com.android.contacts/contacts";
 
     private Context mContext;
-    private HashMap<String, SmsContent> mSmsContent = new HashMap<String, SmsContent>();
+    private List<SmsContent> mSmsList = new ArrayList<SmsContent>();
 
     public SmsDbManager(Context context) {
         this.mContext = context;
@@ -44,15 +44,16 @@ public class SmsDbManager {
      * @param search_content 电话
      * @return 搜索结果信息
      */
-    public HashMap<String, SmsContent> getSmsWithNumber(String search_content) {
+    public List<SmsContent> getSmsWithNumber(String search_content) {
 
         try {
             Uri uri = Uri.parse(SMS_URI_ALL);
             String[] projection = new String[]{"_id", "address", "person", "body", "date", "type"};
 
-            Cursor cur = mContext.getContentResolver().query(uri, projection, "address = '"+search_content+"'", null, "date desc");      // 获取手机内部短信
+            Cursor cur = mContext.getContentResolver().query(uri, projection, "address = '"+search_content+"'", null, "date asc");      // 获取手机内部短信
 
             if (cur.moveToFirst()) {
+                int index_id = cur.getColumnIndex("_id");
                 int index_Address = cur.getColumnIndex("address");
                 int index_Person = cur.getColumnIndex("person");
                 int index_Body = cur.getColumnIndex("body");
@@ -63,33 +64,39 @@ public class SmsDbManager {
                 int id = 0; //记录排序
 
                 do {
+                    SmsContent content = new SmsContent();
+                    int intId = cur.getInt(index_id);
                     String strAddress = cur.getString(index_Address);
-                    String intPerson = cur.getInt(index_Person) + "";
+                    int intPerson = cur.getInt(index_Person);
                     String strBody = cur.getString(index_Body);
                     long longDate = cur.getLong(index_Date);
+
                     int intType = cur.getInt(index_Type);
+                    String strType = "";
+                    if (intType == 1){
+                        strType = "收";
+                    }else if (intType == 2){
+                        strType = "发";
+                    }
 
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                     Date d = new Date(longDate);
                     String strDate = dateFormat.format(d);
 
-                    if (!mSmsContent.containsKey(strAddress)) {
-                        SmsContent content = new SmsContent();
-                        content.setId(++id);
-                        content.setAddress(strAddress);
-                        content.setAmount(1);
-                        content.setLast_date(strDate);
-                        content.setLast_content(strBody);
-                        content.setPerson(intPerson);
-                        mSmsContent.put(strAddress, content);
-                    } else {
-                        mSmsContent.get(strAddress).setAmount(mSmsContent.get(strAddress).getAmount() + 1);
-                        mSmsContent.put(strAddress, mSmsContent.get(strAddress));
-                    }
+                    content.setId(intId);
+                    content.setAddress(strAddress);
+                    content.setBody(strBody);
+                    content.setDate(strDate);
+                    content.setType(strType);
+                    content.setPerson(intPerson);
+
+                    mSmsList.add(content);
 
                 } while (cur.moveToNext());
 
                 if (!cur.isClosed()) {
+
+
                     cur.close();
                 }
             }
@@ -98,7 +105,7 @@ public class SmsDbManager {
             Log.d("SQLiteException in getSmsInPhone", ex.getMessage());
         }
 
-        return mSmsContent;
+        return mSmsList;
     }
 
 
@@ -120,7 +127,6 @@ public class SmsDbManager {
             if (cursor != null){
                 if (cursor.moveToFirst()){
                         String phoneNumber = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        list.add(getSmsWithNumber(phoneNumber));
                 }
 
             }
