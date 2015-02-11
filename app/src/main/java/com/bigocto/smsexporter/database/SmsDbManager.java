@@ -96,7 +96,6 @@ public class SmsDbManager {
 
                 if (!cur.isClosed()) {
 
-
                     cur.close();
                 }
             }

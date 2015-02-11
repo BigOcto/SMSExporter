@@ -1,6 +1,7 @@
 package com.bigocto.smsexporter.control.export;
 
 import com.bigocto.smsexporter.model.SmsContent;
+import com.lowagie.text.DocumentException;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface ExportManager {
 
-    void write(List<SmsContent> list);
+    void write(List<SmsContent> list) throws DocumentException;
     void read();
     void update();
 }
